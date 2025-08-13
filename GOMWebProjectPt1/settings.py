@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sitecore.context_processors.branding',
             ],
         },
     },
@@ -135,6 +136,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 GETRESPONSE_API_KEY = os.getenv('GETRESPONSE_API_KEY', '')
 GETRESPONSE_LIST_ID = os.getenv('GETRESPONSE_LIST_ID', '')
 CALENDLY_URL = os.getenv('CALENDLY_URL', 'https://calendly.com/your-scheduling-link')
+# Branding
+LOGO_URL = os.getenv('LOGO_URL', '')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
