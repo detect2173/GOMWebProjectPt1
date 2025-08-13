@@ -1,34 +1,31 @@
 {% extends 'sitecore/base.html' %}
+{% block title %}Pricing — Great Owl Marketing{% endblock %}
 {% block content %}
-<section>
+<section class="section">
   <h1>Transparent Pricing</h1>
-  <article>
-    <h2>Build & Handoff</h2>
-    <p>
-      We design and build a custom chatbot for your business, integrate with your pages (FB/IG), and deliver full documentation.
-    </p>
-    <ul>
-      <li>Includes: discovery, flow design, integrations, QA, handoff training</li>
-      <li>Support: 14 days post-handoff email support</li>
-    </ul>
-    <p><strong>One-time:</strong> $1,500–$4,000 depending on scope.</p>
-  </article>
-  <article>
-    <h2>Managed Subscription</h2>
-    <p>
-      We build and fully manage your chatbot system, including optimization, campaigns, and updates.
-    </p>
-    <ul>
-      <li>Includes: everything in Build & Handoff, plus ongoing updates and monthly optimizations</li>
-      <li>Support: priority support</li>
-    </ul>
-    <p><strong>Monthly:</strong> $499–$1,499 based on complexity and volume.</p>
-  </article>
-  <p>
-    All tooling (e.g., GetResponse, Calendly) billed directly to you by the vendor. We help you choose the right plan and integrate.
-  </p>
-  <p>
-    <a href="/book/">Book a Call</a>
-  </p>
+  <div class="pricing-grid">
+    <div class="card price-card">
+      <h2>Build & Handoff</h2>
+      <p>We design and build a custom chatbot for your business, integrate with your pages (FB/IG), and deliver full documentation.</p>
+      <ul>
+        <li>Discovery, flow design, integrations, QA</li>
+        <li>Handoff training + 14 days email support</li>
+      </ul>
+      <div class="price">$1,500–$4,000 <small>one-time</small></div>
+      <p><a class="btn btn-ghost" href="/book/">Talk scope</a></p>
+    </div>
+    <div class="card price-card">
+      <h2>Managed Subscription</h2>
+      <p>We build and fully manage your chatbot system, including optimization, campaigns, and updates.</p>
+      <ul>
+        <li>Everything in Build & Handoff</li>
+        <li>Ongoing updates + monthly optimizations</li>
+        <li>Priority support</li>
+      </ul>
+      <div class="price">$499–$1,499 <small>per month</small></div>
+      <p><a class="btn btn-primary" href="/book/">Start with a call</a></p>
+    </div>
+  </div>
+  <p class="help" style="margin-top:16px;">All tooling (GetResponse, Calendly, etc.) is billed directly by the vendor. We'll help you pick the right plan and integrate.</p>
 </section>
 {% endblock %}

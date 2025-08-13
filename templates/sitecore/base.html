@@ -1,34 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Great Owl Marketing</title>
-  <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+  <title>{% block title %}Great Owl Marketing{% endblock %}</title>
+  <meta name="description" content="Custom chatbots for small businesses. Facebook Messenger and Instagram DM automation that wins you customers. Transparent pricing. Book a call." />
+  <meta property="og:title" content="Great Owl Marketing — Custom Chatbots for SMBs" />
+  <meta property="og:description" content="We build and manage Messenger & IG DM chatbots that convert. Transparent pricing and easy scheduling." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://og-playground.vercel.app/api/og?title=Great%20Owl%20Marketing&subtitle=Custom%20Chatbots%20for%20SMBs" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦉</text></svg>">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="/">Great Owl Marketing</a>
-      <ul>
-        <li><a href="/pricing/">Pricing</a></li>
-        <li><a href="/lead-magnet/">Free Lead Magnet</a></li>
-        <li><a href="/book/" class="">Book a Call</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="container navbar">
+      <a class="brand" href="/" aria-label="Great Owl Marketing home">
+        <span class="brand-badge" aria-hidden="true"></span>
+        <span class="brand-title">Great Owl Marketing</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/pricing/">Pricing</a>
+        <a href="/lead-magnet/">Free Lead Magnet</a>
+        <a class="btn btn-primary" href="/book/">Book a Call</a>
+      </nav>
+    </div>
   </header>
   <main>
-    {% if messages %}
-      <section>
-        {% for message in messages %}
-          <p>{{ message }}</p>
-        {% endfor %}
-      </section>
-    {% endif %}
-    {% block content %}{% endblock %}
+    <div class="container section">
+      {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <div class="msg">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </div>
   </main>
-  <footer>
-    <p>© {{ now|default:2025 }} Great Owl Marketing — Custom Chatbots for Small Business</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {{ now|default:2025 }} Great Owl Marketing — Custom Chatbots for Small Business</p>
+    </div>
   </footer>
 </body>
 </html>

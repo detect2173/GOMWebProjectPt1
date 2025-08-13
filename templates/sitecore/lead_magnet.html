@@ -1,15 +1,22 @@
 {% extends 'sitecore/base.html' %}
+{% block title %}Free Lead Magnet — Great Owl Marketing{% endblock %}
 {% block content %}
-<section>
+<section class="section">
   <h1>Free Lead Magnet</h1>
   <p>Get our guide: "Chatbot Playbook for Small Businesses" delivered to your inbox.</p>
-  <form method="post">
+  <form class="form" method="post">
     {% csrf_token %}
-    <label>Name (optional) {{ form.name }}</label>
-    <label>Email {{ form.email }}</label>
-    <label>{{ form.consent }} {{ form.consent.label }}</label>
-    <button type="submit">Send me the guide</button>
+    <label>Name (optional)
+      {{ form.name }}
+    </label>
+    <label>Email
+      {{ form.email }}
+    </label>
+    <label style="display:flex; align-items:center; gap:10px; font-weight:500;">
+      {{ form.consent }} {{ form.consent.label }}
+    </label>
+    <button class="btn btn-primary" type="submit">Send me the guide</button>
   </form>
-  <p>We use GetResponse to deliver your download securely.</p>
+  <p class="help">We use GetResponse to deliver your download securely.</p>
 </section>
 {% endblock %}
