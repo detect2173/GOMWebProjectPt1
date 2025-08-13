@@ -1,0 +1,1 @@
+Commit and push each change using the change summary as the comment

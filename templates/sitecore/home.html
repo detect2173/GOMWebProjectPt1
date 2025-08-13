@@ -1,0 +1,35 @@
+{% extends 'sitecore/base.html' %}
+{% block content %}
+<section>
+  <header>
+    <h1>Custom Chatbots that Win You Customers</h1>
+    <p>Great Owl Marketing builds and manages chatbots for small businesses across any niche. We specialize in Facebook Messenger and Instagram DMs, integrated with your marketing stack.</p>
+    <p>
+      <a href="/lead-magnet/">Get the Free Lead Magnet</a>
+      <a href="/book/">Book a Strategy Call</a>
+    </p>
+  </header>
+</section>
+<section>
+  <h2>How it works</h2>
+  <ol>
+    <li>Discovery: we map your customer journey and offers.</li>
+    <li>Build: we create your bot flows and integrations (GetResponse, Calendly, and more).</li>
+    <li>Launch: we deploy on FB Messenger / IG DMs and monitor.</li>
+  </ol>
+</section>
+<section>
+  <h2>Two transparent models</h2>
+  <ul>
+    <li><strong>Build & Handoff:</strong> one-time fee, you manage it. Perfect if you have internal resources.</li>
+    <li><strong>Managed Subscription:</strong> we build and fully manage your system, including updates and optimization.</li>
+  </ul>
+  <p><a href="/pricing/">See Pricing</a></p>
+</section>
+<section>
+  <h2>Book a Call</h2>
+  <p>Pick a time that works for you:</p>
+  <div class="calendly-inline-widget" data-url="{{ calendly_url }}" style="min-width:320px;height:630px;"></div>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</section>
+{% endblock %}

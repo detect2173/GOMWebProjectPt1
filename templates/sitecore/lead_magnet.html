@@ -1,0 +1,15 @@
+{% extends 'sitecore/base.html' %}
+{% block content %}
+<section>
+  <h1>Free Lead Magnet</h1>
+  <p>Get our guide: "Chatbot Playbook for Small Businesses" delivered to your inbox.</p>
+  <form method="post">
+    {% csrf_token %}
+    <label>Name (optional) {{ form.name }}</label>
+    <label>Email {{ form.email }}</label>
+    <label>{{ form.consent }} {{ form.consent.label }}</label>
+    <button type="submit">Send me the guide</button>
+  </form>
+  <p>We use GetResponse to deliver your download securely.</p>
+</section>
+{% endblock %}
