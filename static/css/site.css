@@ -41,6 +41,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .navbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand-logo { height: 36px; width: auto; border-radius: 8px; box-shadow: var(--shadow); background: #0b1220; }
 .brand-badge {
   width: 36px; height: 36px; border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #ffd166 0 35%, #fca311 36% 55%, #b45309 56% 100%);
