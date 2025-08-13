@@ -16,7 +16,7 @@ Set these environment variables before running in production:
 - GETRESPONSE_API_KEY
 - GETRESPONSE_LIST_ID
 - CALENDLY_URL (e.g., https://calendly.com/your-link)
-- LOGO_URL (a full URL to your logo image; e.g., https://yourcdn.com/logo.png)
+- LOGO_URL (optional; defaults to /static/img/logo.png). Place your logo at static/img/logo.png or set LOGO_URL to another static path or full URL.
 
 Running locally
 - pip install -r requirements.txt
@@ -55,7 +55,8 @@ How to set variables
   $env:GETRESPONSE_LIST_ID = "your_list_id"
   $env:CALENDLY_URL = "https://calendly.com/your-link"
   $env:DJANGO_DEBUG = "True"  # or "False"
-  $env:LOGO_URL = "https://yourcdn.com/logo.png"  # or a GitHub raw URL
+  # Optional, only if you are not placing the file at static/img/logo.png
+  $env:LOGO_URL = "/static/img/logo.png"
 
 - Namecheap cPanel (Setup Python App):
   1) Open your application

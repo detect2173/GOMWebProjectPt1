@@ -137,7 +137,8 @@ GETRESPONSE_API_KEY = os.getenv('GETRESPONSE_API_KEY', '')
 GETRESPONSE_LIST_ID = os.getenv('GETRESPONSE_LIST_ID', '')
 CALENDLY_URL = os.getenv('CALENDLY_URL', 'https://calendly.com/your-scheduling-link')
 # Branding
-LOGO_URL = os.getenv('LOGO_URL', '')
+# If not provided via env, default to the local static path where you can place your file
+LOGO_URL = os.getenv('LOGO_URL', '/static/img/logo.png')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
