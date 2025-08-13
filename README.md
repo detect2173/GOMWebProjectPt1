@@ -66,3 +66,14 @@ How to set variables
 Where these are used in code
 - sitecore/views.py: the lead magnet POST will try to subscribe via GetResponse using GETRESPONSE_API_KEY and GETRESPONSE_LIST_ID; if unset, it logs a warning and continues gracefully.
 - GOMWebProjectPt1/settings.py: reads CALENDLY_URL and passes it to templates for the embedded widget.
+
+Local setup via .env (recommended)
+- Copy .env.example to .env and fill in your values. Do NOT commit .env (it’s in .gitignore).
+- Example:
+  GETRESPONSE_API_KEY=your_real_key
+  GETRESPONSE_LIST_ID=your_list_id
+  CALENDLY_URL=https://calendly.com/your-link
+
+Namecheap cPanel setup
+- In Setup Python App > Environment variables, add your real values for GETRESPONSE_API_KEY and GETRESPONSE_LIST_ID.
+- Keep your keys private; never commit them to the repository.

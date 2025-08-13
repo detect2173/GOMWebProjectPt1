@@ -52,6 +52,8 @@ In cPanel > Setup Python App > your app, add the following Environment variables
 - GETRESPONSE_LIST_ID = your_list_id
 - CALENDLY_URL = https://calendly.com/your-scheduling-link
 
+Tip: Keep your API keys private. Do not commit them to git. This project supports a .env file locally (via python-dotenv); on the server use cPanel Environment variables.
+
 5) Collect static files and run migrations
 From the app’s virtual environment (via Terminal/SSH):
 - python manage.py migrate
