@@ -85,3 +85,11 @@ Security checklist
 - Rotate SECRET_KEY before going live (move to an environment variable for production if possible).
 
 That’s it! After these steps, your Django app should run on Namecheap’s shared hosting under cPanel with Passenger.
+
+
+
+Practical values for greatowlmarketing.com
+- DJANGO_ALLOWED_HOSTS = greatowlmarketing.com,www.greatowlmarketing.com
+- DJANGO_CSRF_TRUSTED_ORIGINS = https://greatowlmarketing.com,https://www.greatowlmarketing.com
+
+Note: Keep localhost and 127.0.0.1 in your local .env only; on the server, you typically only set your real domains.
