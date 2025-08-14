@@ -75,3 +75,20 @@ def lead_magnet(request):
 
 def lead_thanks(request):
     return render(request, 'sitecore/lead_thanks.html')
+
+
+def terms(request):
+    return render(request, 'sitecore/terms.html')
+
+
+def privacy(request):
+    return render(request, 'sitecore/privacy.html')
+
+
+def start(request):
+    """Post-payment onboarding form embed page.
+    If ONBOARDING_EMBED_URL is provided, we render an iframe; otherwise show instructions.
+    """
+    return render(request, 'sitecore/start.html', {
+        'embed_url': getattr(settings, 'ONBOARDING_EMBED_URL', ''),
+    })

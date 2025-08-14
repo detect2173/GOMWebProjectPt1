@@ -1,0 +1,18 @@
+{% extends 'sitecore/base.html' %}
+{% block title %}Start Your Project — Great Owl Marketing{% endblock %}
+{% block content %}
+<section class="section">
+  <h1>Start Your Project</h1>
+  <p>Thanks for your purchase! Please complete the short form below so we can kick things off.</p>
+  {% if embed_url %}
+    <div class="card" style="padding:0; overflow:hidden;">
+      <iframe src="{{ embed_url }}" style="width:100%; height:900px; border:0;" allow="clipboard-write; camera; microphone;" title="Project Intake Form"></iframe>
+    </div>
+  {% else %}
+    <div class="card">
+      <p><strong>Form coming soon.</strong> We don’t have an embed URL configured yet.</p>
+      <p>To configure, set ONBOARDING_EMBED_URL in your environment (e.g., a Typeform, Tally, Jotform, or Google Form share link).</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

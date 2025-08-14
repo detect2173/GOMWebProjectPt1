@@ -26,3 +26,15 @@ class BasicPagesTest(TestCase):
         })
         self.assertEqual(r.status_code, 302)  # redirect to thanks
         self.assertIn(reverse('lead_thanks'), r.url)
+
+    def test_terms(self):
+        r = self.client.get(reverse('terms'))
+        self.assertEqual(r.status_code, 200)
+
+    def test_privacy(self):
+        r = self.client.get(reverse('privacy'))
+        self.assertEqual(r.status_code, 200)
+
+    def test_start(self):
+        r = self.client.get(reverse('start'))
+        self.assertEqual(r.status_code, 200)
