@@ -72,7 +72,7 @@ Local setup via .env (recommended)
 - Example:
   GETRESPONSE_API_KEY=your_real_key
   GETRESPONSE_LIST_ID=your_list_id
-  CALENDLY_URL=https://calendly.com/your-link
+  CALENDLY_URL=https://calendly.com/phineasjholdings-info/30min
 
 Namecheap cPanel setup
 - In Setup Python App > Environment variables, add your real values for GETRESPONSE_API_KEY and GETRESPONSE_LIST_ID.
