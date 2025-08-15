@@ -92,3 +92,15 @@ def start(request):
     return render(request, 'sitecore/start.html', {
         'embed_url': getattr(settings, 'ONBOARDING_EMBED_URL', ''),
     })
+
+
+def gom_onboarding(request):
+    """Serve the standalone onboarding form at /gom-onboarding.html (exact filename in URL)."""
+    return render(request, 'gom-onboarding.html')
+
+
+def smartpro_agreement(request):
+    """Serve the standalone agreement page at /smartpro-agreement.html (exact filename in URL).
+    We'll replace its contents when the embed code is provided.
+    """
+    return render(request, 'smartpro-agreement.html')
