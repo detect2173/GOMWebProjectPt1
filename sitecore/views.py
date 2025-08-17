@@ -64,9 +64,9 @@ def lead_magnet(request):
             # Attempt subscription
             subscribed = _subscribe_to_getresponse(name, email)
             if subscribed:
-                messages.success(request, 'Check your inbox! Your lead magnet is on its way.')
+                messages.success(request, 'Check your inbox! Your free guide is on its way.')
             else:
-                messages.info(request, 'Thanks! We saved your email. We will send the lead magnet shortly.')
+                messages.info(request, 'Thanks! We saved your email. We will send the free guide shortly.')
             return redirect('lead_thanks')
     else:
         form = LeadMagnetForm()
