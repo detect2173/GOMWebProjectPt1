@@ -132,3 +132,43 @@ img, svg { display: block; max-width: 100%; }
   .how-steps { grid-template-columns: 1fr; }
   .how-ctas { flex-direction: column; }
 }
+
+
+/* --- UI polish: How it works card refinements --- */
+.hero-art {
+  padding: 16px; /* add breathing room inside rounded rectangle */
+  box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.how-steps { gap: 16px; padding: 12px; }
+.how-step {
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 112px;
+}
+.how-emoji {
+  width: 32px; height: 32px; border-radius: 10px;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 35%, rgba(124,77,255,0.35), rgba(75,107,251,0.25));
+  border: 1px solid rgba(255,255,255,0.14);
+  font-size: 18px; /* consistent scale */
+}
+.how-step h4 { margin: 4px 0 4px; font-size: 16px; font-weight: 700; letter-spacing: 0.2px; }
+.how-step p { margin: 0; color: #d3ddf3; line-height: 1.55; font-size: 14px; }
+
+.how-ctas {
+  margin-top: 8px;
+  padding: 14px 12px 6px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start;
+}
+
+/* Owl sizing on narrow screens so it doesn't crowd content */
+@media (max-width: 980px) {
+  .hero-art::after { font-size: 40px; right: 14px; top: 10px; }
+}
