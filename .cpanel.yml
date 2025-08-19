@@ -1,14 +1,15 @@
 ---
 deployment:
   tasks:
-    # Ensure we are in the repo root
-    - export DEPLOYPATH="$PWD"
+    # Prefer a project virtualenv if present; else fall back to python3; final fallback to cPanel's python
+    - 'PY=python3'
+    - 'if [ -x ".venv/bin/python" ]; then PY=".venv/bin/python"; elif [ -x "venv/bin/python" ]; then PY="venv/bin/python"; elif command -v python3 >/dev/null 2>&1; then PY="python3"; else PY="/usr/local/cpanel/3rdparty/bin/python3"; fi'
 
-    # Install or update python dependencies in user scope to avoid permission issues
-    - /usr/local/cpanel/3rdparty/bin/python3 -m pip install --user -r requirements.txt || true
+    # Install or update dependencies for the selected interpreter (user scope avoids permission errors)
+    - '$PY -m pip install --user -r requirements.txt || true'
 
-    # Collect static files if configured; ignore failure if STATICFILES not set up
-    - /usr/local/cpanel/3rdparty/bin/python3 manage.py collectstatic --noinput || true
+    # Collect static files if Django manage.py exists; ignore failure if STATICFILES not configured
+    - '[ -f manage.py ] && $PY manage.py collectstatic --noinput || true'
 
     # Touch Passenger restart flag (untracked) to reload the app
-    - /bin/touch tmp/restart.txt
+    - 'mkdir -p tmp && /bin/touch tmp/restart.txt'
