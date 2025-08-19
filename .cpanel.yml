@@ -1,0 +1,14 @@
+---
+deployment:
+  tasks:
+    # Ensure we are in the repo root
+    - export DEPLOYPATH="$PWD"
+
+    # Install or update python dependencies in user scope to avoid permission issues
+    - /usr/local/cpanel/3rdparty/bin/python3 -m pip install --user -r requirements.txt || true
+
+    # Collect static files if configured; ignore failure if STATICFILES not set up
+    - /usr/local/cpanel/3rdparty/bin/python3 manage.py collectstatic --noinput || true
+
+    # Touch Passenger restart flag (untracked) to reload the app
+    - /bin/touch tmp/restart.txt

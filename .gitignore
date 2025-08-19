@@ -1,14 +1,15 @@
-# Python
+# Ignore cPanel/Passenger restart flag and other temp files
+# The flag should be created by the deploy script (.cpanel.yml), not tracked in git.
+tmp/*
+!tmp/.gitkeep
+
+# Bytecode / caches
 __pycache__/
 *.py[cod]
-*.egg-info/
+*.pyo
+*.pyd
+*.pyc
 
-# Django
-/staticfiles/
-/db.sqlite3
-
-# Environments
-.env
+# Virtualenvs
 .venv/
 venv/
-ENV/
