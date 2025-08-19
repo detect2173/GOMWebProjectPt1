@@ -226,3 +226,8 @@ img, svg { display: block; max-width: 100%; }
 @media (max-width: 980px) {
   .hero-art::before { opacity: 0.8; }
 }
+
+
+/* Centered flash messages */
+.messages { display: grid; gap: 10px; justify-items: center; }
+.msg { max-width: 720px; width: 100%; text-align: center; margin: 0 auto; }
