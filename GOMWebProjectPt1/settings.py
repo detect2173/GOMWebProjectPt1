@@ -147,8 +147,13 @@ ONBOARDING_EMBED_URL = os.getenv('ONBOARDING_EMBED_URL', '')
 # Branding
 # If not provided via env, default to the local static path where you can place your file
 LOGO_URL = os.getenv('LOGO_URL', '/static/img/logo.png')
-# Optional cache-busting param for static assets; set via env on deploy (e.g., 2025-08-19a)
-STATIC_VERSION = os.getenv('STATIC_VERSION', '')
+# Static asset version for cache-busting. Prefer setting via env (STATIC_VERSION) on deploy.
+# Fallback uses UTC timestamp at process start, so each app reload updates the version.
+try:
+    from datetime import datetime
+    STATIC_VERSION = os.getenv('STATIC_VERSION', datetime.utcnow().strftime('%Y%m%d%H%M'))
+except Exception:
+    STATIC_VERSION = os.getenv('STATIC_VERSION', '1')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

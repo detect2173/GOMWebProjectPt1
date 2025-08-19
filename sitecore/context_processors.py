@@ -6,5 +6,5 @@ def branding(request):
     return {
         'logo_url': getattr(settings, 'LOGO_URL', ''),
         'site_name': 'Great Owl Marketing',
-        'static_version': getattr(settings, 'STATIC_VERSION', ''),
+        'STATIC_VERSION': getattr(settings, 'STATIC_VERSION', '1'),
     }
