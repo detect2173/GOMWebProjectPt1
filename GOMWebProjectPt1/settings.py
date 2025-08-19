@@ -147,6 +147,8 @@ ONBOARDING_EMBED_URL = os.getenv('ONBOARDING_EMBED_URL', '')
 # Branding
 # If not provided via env, default to the local static path where you can place your file
 LOGO_URL = os.getenv('LOGO_URL', '/static/img/logo.png')
+# Optional cache-busting param for static assets; set via env on deploy (e.g., 2025-08-19a)
+STATIC_VERSION = os.getenv('STATIC_VERSION', '')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
