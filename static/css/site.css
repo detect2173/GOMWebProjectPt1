@@ -314,3 +314,64 @@ html[data-theme='editorial'] .site-footer { border-top: 1px solid var(--line) !i
 
 html[data-theme='editorial'] a { color: #1f49ff; }
 html[data-theme='editorial'] a:hover { color: #1534b3; }
+
+
+/* Fix: provide standards-compliant :root selectors for custom properties (some browsers ignore ::root) */
+:root {
+  --brand: #4b6bfb;          /* Indigo Blue */
+  --brand-2: #7c4dff;        /* Violet */
+  --accent: #21c998;         /* Teal */
+  --ink: #0e0f13;            /* Near black */
+  --muted: #5c6470;          /* Gray text */
+  --bg: #0b1220;             /* Deep night */
+  --card: #101827;           /* Card bg */
+  --line: #1e293b;           /* Lines */
+  --white: #ffffff;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --radius: 14px;
+  --radius-sm: 10px;
+}
+
+:root[data-theme='editorial'] {
+  --brand: #3b5bdb;          /* Indigo 600 */
+  --brand-2: #7c4dff;        /* Violet */
+  --accent: #14b887;         /* Teal 500 */
+  --ink: #0e0f13;            /* Text */
+  --muted: #5b6472;          /* Muted text */
+  --bg: #f7f9fc;             /* App background */
+  --card: #ffffff;           /* Card background */
+  --line: #e6eaf3;           /* Keylines */
+  --white: #0e0f13;          /* Treat white usages as ink in light mode */
+  --shadow: 0 10px 30px rgba(33, 37, 41, 0.08);
+}
+
+
+/* Fixed :root block (final override) */
+:root {
+  --brand: #4b6bfb;
+  --brand-2: #7c4dff;
+  --accent: #21c998;
+  --ink: #0e0f13;
+  --muted: #5c6470;
+  --bg: #0b1220;
+  --card: #101827;
+  --line: #1e293b;
+  --white: #ffffff;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --radius: 14px;
+  --radius-sm: 10px;
+}
+
+/* Fixed editorial token overrides (final override) */
+:root[data-theme='editorial'] {
+  --brand: #3b5bdb;
+  --brand-2: #7c4dff;
+  --accent: #14b887;
+  --ink: #0e0f13;
+  --muted: #5b6472;
+  --bg: #f7f9fc;
+  --card: #ffffff;
+  --line: #e6eaf3;
+  --white: #0e0f13;
+  --shadow: 0 10px 30px rgba(33, 37, 41, 0.08);
+}
