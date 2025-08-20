@@ -1,0 +1,94 @@
+/* Light Editorial theme overrides for Great Owl Marketing */
+/* This file overrides a subset of tokens and key components when loaded. */
+
+:root {
+  /* Core palette (light) */
+  --brand: #3b5bdb;          /* Indigo 600 */
+  --brand-2: #7c4dff;        /* Violet */
+  --accent: #14b887;         /* Teal 500 */
+  --ink: #0e0f13;            /* Text */
+  --muted: #5b6472;          /* Muted text */
+  --bg: #f7f9fc;             /* App background */
+  --card: #ffffff;           /* Card background */
+  --line: #e6eaf3;           /* Keylines */
+  --white: #0e0f13;          /* In light mode, treat "white" usage as ink by default */
+  --shadow: 0 10px 30px rgba(33, 37, 41, 0.08);
+  --radius: 14px;
+  --radius-sm: 10px;
+}
+
+/* Base */
+body {
+  background: linear-gradient(180deg, #f7f9fc 0%, #f7f9fc 100%) !important;
+  color: var(--ink) !important;
+}
+
+/* Header / Nav */
+.site-header {
+  background: rgba(255,255,255,0.8) !important;
+  border-bottom: 1px solid var(--line) !important;
+  backdrop-filter: saturate(130%) blur(8px);
+}
+.brand-logo { background: transparent !important; box-shadow: none !important; }
+.brand-title { color: var(--ink) !important; }
+.nav-links a { color: var(--ink) !important; }
+.nav-links a:hover { background: rgba(9, 38, 66, 0.06) !important; }
+
+/* Buttons */
+.btn-primary { color: #fff !important; }
+.btn-ghost {
+  background: transparent !important;
+  color: var(--ink) !important;
+  border: 1px solid rgba(9,38,66,0.15) !important;
+}
+.btn-ghost:hover { background: rgba(9,38,66,0.06) !important; }
+
+/* Hero */
+.hero h1 { color: var(--ink) !important; }
+.hero p { color: #3a475a !important; }
+.hero-art {
+  background: var(--card) !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: var(--shadow) !important;
+}
+.hero-art::before {
+  /* Soften the gradient ring in light mode */
+  opacity: 0.35 !important;
+}
+.hero-art::after { filter: none !important; }
+
+/* How it works block */
+.how-step { background: #fbfcfe !important; border: 1px solid var(--line) !important; }
+.how-step p { color: #405166 !important; }
+.how-emoji { background: linear-gradient(135deg, rgba(124,77,255,0.16), rgba(75,107,251,0.12)) !important; border-color: rgba(9,38,66,0.12) !important; }
+.hero-art .how-ctas { background: linear-gradient(180deg, rgba(9,38,66,0.04), rgba(9,38,66,0.02)) !important; border-top: 1px solid var(--line) !important; }
+.hero-art .how-ctas .btn-ghost { border-color: rgba(9,38,66,0.2) !important; }
+
+/* Badges */
+.badge { background: rgba(20, 184, 135, 0.12) !important; color: #10634e !important; border: 1px solid rgba(20,184,135,0.24) !important; }
+
+/* Cards */
+.card { background: var(--card) !important; border: 1px solid var(--line) !important; box-shadow: var(--shadow) !important; }
+.card p { color: #405166 !important; }
+
+/* Pricing */
+.price small { color: #6b7a90 !important; }
+
+/* Forms */
+.form label { color: #223146 !important; }
+.form input[type="text"], .form input[type="email"], .form checkbox, .form textarea, .form select {
+  background: #ffffff !important; border: 1px solid var(--line) !important; color: var(--ink) !important;
+}
+.help { color: #4d5c72 !important; }
+
+/* Messages */
+.msg { border: 1px solid var(--line) !important; background: #fff !important; color: var(--ink) !important; box-shadow: 0 6px 16px rgba(33,37,41,0.06) !important; }
+.msg-close { color: #4d5c72 !important; }
+.msg-close:hover { background: rgba(9,38,66,0.08) !important; }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--line) !important; color: #4d5c72 !important; background: #fff !important; }
+
+/* Links inside content */
+a { color: #1f49ff; }
+a:hover { color: #1534b3; }

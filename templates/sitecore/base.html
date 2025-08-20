@@ -19,6 +19,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦉</text></svg>">
   {% endif %}
   <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <link id="theme-override" rel="stylesheet" href="" disabled>
 </head>
 <body>
   <header class="site-header">
@@ -35,6 +36,7 @@
         <a href="/pricing/">Pricing</a>
         <a href="{% url 'free_guide' %}">Free Guide</a>
         <a class="btn btn-primary" href="/book/">Book a Call</a>
+        <button id="theme-toggle" class="btn btn-ghost" type="button" aria-label="Toggle theme">Switch Theme</button>
       </nav>
     </div>
   </header>
@@ -66,5 +68,45 @@
       <p>© {{ now|default:2025 }} Great Owl Marketing — Custom Chatbots for Small Business · <a href="/terms/">Terms</a> · <a href="/privacy/">Privacy</a></p>
     </div>
   </footer>
+  <script>
+    (function(){
+      var KEY = 'gom_theme';
+      var THEMES = { midnight: 'midnight', editorial: 'editorial' };
+      var link = document.getElementById('theme-override');
+      function apply(theme){
+        if(!link) return;
+        if(theme === THEMES.editorial){
+          link.href = '{% static "css/site.light.css" %}';
+          link.disabled = false;
+          document.documentElement.setAttribute('data-theme', 'editorial');
+          setToggleLabel('Light');
+        } else {
+          link.href = '';
+          link.disabled = true;
+          document.documentElement.setAttribute('data-theme', 'midnight');
+          setToggleLabel('Dark');
+        }
+      }
+      function setToggleLabel(current){
+        var btn = document.getElementById('theme-toggle');
+        if(btn){ btn.textContent = 'Theme: ' + current; }
+      }
+      function getParamTheme(){
+        var m = location.search.match(/[?&]theme=([a-zA-Z]+)/);
+        return m ? m[1].toLowerCase() : null;
+      }
+      var initial = localStorage.getItem(KEY) || getParamTheme() || THEMES.midnight;
+      if(initial !== THEMES.editorial && initial !== THEMES.midnight){ initial = THEMES.midnight; }
+      apply(initial);
+      var btn = document.getElementById('theme-toggle');
+      if(btn){
+        btn.addEventListener('click', function(){
+          var next = (localStorage.getItem(KEY) || initial) === THEMES.editorial ? THEMES.midnight : THEMES.editorial;
+          localStorage.setItem(KEY, next);
+          apply(next);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
