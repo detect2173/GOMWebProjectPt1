@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Lead(models.Model):
     name = models.CharField(max_length=120, blank=True)
     email = models.EmailField(unique=True)

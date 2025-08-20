@@ -10,16 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment variables from a .env file if present (no-op in production unless you add one)
-import os
 try:
-    from dotenv import load_dotenv  # type: ignore
-    load_dotenv(dotenv_path=BASE_DIR / '.env')
+    from dotenv import load_dotenv
+
+    load_dotenv(dotenv_path=BASE_DIR / ".env")
 except Exception:
     pass
 
@@ -27,74 +28,80 @@ except Exception:
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!#our157cztlhwk9^_6l9%8ujcj+qjn=6p^fq4l7uik9^+*rpf'
+SECRET_KEY = "django-insecure-!#our157cztlhwk9^_6l9%8ujcj+qjn=6p^fq4l7uik9^+*rpf"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG', 'True').lower() == 'true'
+DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
 
 # Comma-separated list, e.g. "example.com,www.example.com"
-_allowed = os.getenv('DJANGO_ALLOWED_HOSTS', '').strip()
-ALLOWED_HOSTS = [h.strip() for h in _allowed.split(',') if h.strip()] if _allowed else []
+_allowed = os.getenv("DJANGO_ALLOWED_HOSTS", "").strip()
+ALLOWED_HOSTS = (
+    [h.strip() for h in _allowed.split(",") if h.strip()] if _allowed else []
+)
+# Ease local dev/tests: allow Django test client host when DEBUG
+if DEBUG and "testserver" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS += ["testserver", "localhost", "127.0.0.1"]
 
 # Optional: CSRF trusted origins, comma-separated full origins like https://example.com
-_csrf = os.getenv('DJANGO_CSRF_TRUSTED_ORIGINS', '').strip()
-CSRF_TRUSTED_ORIGINS = [o.strip() for o in _csrf.split(',') if o.strip()] if _csrf else []
+_csrf = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").strip()
+CSRF_TRUSTED_ORIGINS = (
+    [o.strip() for o in _csrf.split(",") if o.strip()] if _csrf else []
+)
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'sitecore',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "sitecore",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Adds explicit Permissions-Policy header to avoid noisy console warnings from embeds/extensions
-    'sitecore.middleware.PermissionsPolicyMiddleware',
+    "sitecore.middleware.PermissionsPolicyMiddleware",
 ]
 
-ROOT_URLCONF = 'GOMWebProjectPt1.urls'
+ROOT_URLCONF = "GOMWebProjectPt1.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'sitecore.context_processors.branding',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "sitecore.context_processors.branding",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'GOMWebProjectPt1.wsgi.application'
+WSGI_APPLICATION = "GOMWebProjectPt1.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -104,16 +111,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -121,9 +128,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -133,31 +140,34 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 # Where collectstatic will gather production assets
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # WhiteNoise static files storage for compressed, hashed files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Marketing integrations (configure via environment variables)
-GETRESPONSE_API_KEY = os.getenv('GETRESPONSE_API_KEY', '')
-GETRESPONSE_LIST_ID = os.getenv('GETRESPONSE_LIST_ID', '')
-CALENDLY_URL = os.getenv('CALENDLY_URL', 'https://calendly.com/your-scheduling-link')
+GETRESPONSE_API_KEY = os.getenv("GETRESPONSE_API_KEY", "")
+GETRESPONSE_LIST_ID = os.getenv("GETRESPONSE_LIST_ID", "")
+CALENDLY_URL = os.getenv("CALENDLY_URL", "https://calendly.com/your-scheduling-link")
 # Post-purchase onboarding form (embed URL, e.g., a Typeform, Tally, Jotform, or Google Form)
-ONBOARDING_EMBED_URL = os.getenv('ONBOARDING_EMBED_URL', '')
+ONBOARDING_EMBED_URL = os.getenv("ONBOARDING_EMBED_URL", "")
 # Branding
 # If not provided via env, default to the local static path where you can place your file
-LOGO_URL = os.getenv('LOGO_URL', '/static/img/logo.png')
+LOGO_URL = os.getenv("LOGO_URL", "/static/img/logo.png")
 # Static asset version for cache-busting. Prefer setting via env (STATIC_VERSION) on deploy.
 # Fallback uses UTC timestamp at process start, so each app reload updates the version.
 try:
     from datetime import datetime
-    STATIC_VERSION = os.getenv('STATIC_VERSION', datetime.utcnow().strftime('%Y%m%d%H%M'))
+
+    STATIC_VERSION = os.getenv(
+        "STATIC_VERSION", datetime.utcnow().strftime("%Y%m%d%H%M")
+    )
 except Exception:
-    STATIC_VERSION = os.getenv('STATIC_VERSION', '1')
+    STATIC_VERSION = os.getenv("STATIC_VERSION", "1")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
