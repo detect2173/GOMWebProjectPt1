@@ -1,4 +1,5 @@
-from typing import Callable
+from collections.abc import Callable
+
 from django.http import HttpRequest, HttpResponse
 
 
@@ -22,5 +23,9 @@ class PermissionsPolicyMiddleware:
     def __call__(self, request: HttpRequest) -> HttpResponse:
         response = self.get_response(request)
         # Allow payment feature to avoid console warnings on pages with embeds/extensions.
-        response["Permissions-Policy"] = "payment=(*)"
+        # Send both modern and legacy headers with broadly compatible syntax.
+        # Newer syntax (Permissions-Policy): allow all origins
+        response["Permissions-Policy"] = "payment=*"
+        # Legacy header (Feature-Policy): broad allow for compatibility with older Chromium
+        response["Feature-Policy"] = "payment *"
         return response
