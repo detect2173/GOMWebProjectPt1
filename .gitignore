@@ -1,5 +1,4 @@
-# Ignore cPanel/Passenger restart flag and other temp files
-# The flag should be created by the deploy script (.cpanel.yml), not tracked in git.
+# Ignore cPanel/Passenger restart flag and temp files
 tmp/*
 !tmp/.gitkeep
 
@@ -13,3 +12,37 @@ __pycache__/
 # Virtualenvs
 .venv/
 venv/
+
+# SQLite database (local dev only)
+db.sqlite3
+
+# JetBrains / PyCharm project settings
+.idea/
+
+# VS Code settings (if ever used)
+.vscode/
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# Test / coverage outputs
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# Build / dist artifacts
+build/
+dist/
+*.egg-info/
+
+# Local environment files
+.env
+.env.*
+*.local
+
+# Logs
+*.log
