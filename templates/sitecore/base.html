@@ -76,13 +76,15 @@
       function apply(theme){
         if(!link) return;
         if(theme === THEMES.editorial){
-          link.href = '{% static "css/site.light.css" %}';
-          link.disabled = false;
+          // Ensure the override stylesheet is enabled in a robust way
+          link.setAttribute('href', '{% static "css/site.light.css" %}');
+          link.removeAttribute('disabled');
           document.documentElement.setAttribute('data-theme', 'editorial');
           setToggleLabel('Light');
         } else {
-          link.href = '';
-          link.disabled = true;
+          // Disable the override by clearing href and marking disabled
+          link.setAttribute('href', '');
+          link.setAttribute('disabled', 'disabled');
           document.documentElement.setAttribute('data-theme', 'midnight');
           setToggleLabel('Dark');
         }
