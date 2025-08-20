@@ -245,3 +245,72 @@ img, svg { display: block; max-width: 100%; }
   font-size: 18px; line-height: 1; cursor: pointer; padding: 2px 6px; border-radius: 8px;
 }
 .msg-close:hover { background: rgba(255,255,255,0.08); }
+
+
+/* Light Editorial Theme (inline, attribute-gated) */
+:root[data-theme='editorial'] {
+  --brand: #3b5bdb;          /* Indigo 600 */
+  --brand-2: #7c4dff;        /* Violet */
+  --accent: #14b887;         /* Teal 500 */
+  --ink: #0e0f13;            /* Text */
+  --muted: #5b6472;          /* Muted text */
+  --bg: #f7f9fc;             /* App background */
+  --card: #ffffff;           /* Card background */
+  --line: #e6eaf3;           /* Keylines */
+  --white: #0e0f13;          /* Treat white usages as ink in light mode */
+  --shadow: 0 10px 30px rgba(33, 37, 41, 0.08);
+}
+
+html[data-theme='editorial'] body {
+  background: linear-gradient(180deg, #f7f9fc 0%, #f7f9fc 100%) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme='editorial'] .site-header {
+  background: rgba(255,255,255,0.8) !important;
+  border-bottom: 1px solid var(--line) !important;
+  backdrop-filter: saturate(130%) blur(8px);
+}
+html[data-theme='editorial'] .brand-logo { background: transparent !important; box-shadow: none !important; }
+html[data-theme='editorial'] .brand-title { color: var(--ink) !important; }
+html[data-theme='editorial'] .nav-links a { color: var(--ink) !important; }
+html[data-theme='editorial'] .nav-links a:hover { background: rgba(9, 38, 66, 0.06) !important; }
+
+html[data-theme='editorial'] .btn-primary { color: #fff !important; }
+html[data-theme='editorial'] .btn-ghost { background: transparent !important; color: var(--ink) !important; border: 1px solid rgba(9,38,66,0.15) !important; }
+html[data-theme='editorial'] .btn-ghost:hover { background: rgba(9,38,66,0.06) !important; }
+
+html[data-theme='editorial'] .hero h1 { color: var(--ink) !important; }
+html[data-theme='editorial'] .hero p { color: #3a475a !important; }
+html[data-theme='editorial'] .hero-art { background: var(--card) !important; border: 1px solid var(--line) !important; box-shadow: var(--shadow) !important; }
+html[data-theme='editorial'] .hero-art::before { opacity: 0.35 !important; }
+html[data-theme='editorial'] .hero-art::after { filter: none !important; }
+
+html[data-theme='editorial'] .how-step { background: #fbfcfe !important; border: 1px solid var(--line) !important; }
+html[data-theme='editorial'] .how-step p { color: #405166 !important; }
+html[data-theme='editorial'] .how-emoji { background: linear-gradient(135deg, rgba(124,77,255,0.16), rgba(75,107,251,0.12)) !important; border-color: rgba(9,38,66,0.12) !important; }
+html[data-theme='editorial'] .hero-art .how-ctas { background: linear-gradient(180deg, rgba(9,38,66,0.04), rgba(9,38,66,0.02)) !important; border-top: 1px solid var(--line) !important; }
+html[data-theme='editorial'] .hero-art .how-ctas .btn-ghost { border-color: rgba(9,38,66,0.2) !important; }
+
+html[data-theme='editorial'] .badge { background: rgba(20, 184, 135, 0.12) !important; color: #10634e !important; border: 1px solid rgba(20,184,135,0.24) !important; }
+html[data-theme='editorial'] .card { background: var(--card) !important; border: 1px solid var(--line) !important; box-shadow: var(--shadow) !important; }
+html[data-theme='editorial'] .card p { color: #405166 !important; }
+
+html[data-theme='editorial'] .price small { color: #6b7a90 !important; }
+
+html[data-theme='editorial'] .form label { color: #223146 !important; }
+html[data-theme='editorial'] .form input[type="text"],
+html[data-theme='editorial'] .form input[type="email"],
+html[data-theme='editorial'] .form checkbox,
+html[data-theme='editorial'] .form textarea,
+html[data-theme='editorial'] .form select { background: #ffffff !important; border: 1px solid var(--line) !important; color: var(--ink) !important; }
+html[data-theme='editorial'] .help { color: #4d5c72 !important; }
+
+html[data-theme='editorial'] .msg { border: 1px solid var(--line) !important; background: #fff !important; color: var(--ink) !important; box-shadow: 0 6px 16px rgba(33,37,41,0.06) !important; }
+html[data-theme='editorial'] .msg-close { color: #4d5c72 !important; }
+html[data-theme='editorial'] .msg-close:hover { background: rgba(9,38,66,0.08) !important; }
+
+html[data-theme='editorial'] .site-footer { border-top: 1px solid var(--line) !important; color: #4d5c72 !important; background: #fff !important; }
+
+html[data-theme='editorial'] a { color: #1f49ff; }
+html[data-theme='editorial'] a:hover { color: #1534b3; }

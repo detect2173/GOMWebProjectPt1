@@ -19,7 +19,6 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦉</text></svg>">
   {% endif %}
   <link rel="stylesheet" href="{% static 'css/site.css' %}">
-  <link id="theme-override" rel="stylesheet" href="" disabled>
 </head>
 <body>
   <header class="site-header">
@@ -72,22 +71,11 @@
     (function(){
       var KEY = 'gom_theme';
       var THEMES = { midnight: 'midnight', editorial: 'editorial' };
-      var link = document.getElementById('theme-override');
       function apply(theme){
-        if(!link) return;
         if(theme === THEMES.editorial){
-          // Ensure the override stylesheet is enabled in a robust way
-          link.setAttribute('href', '{% static "css/site.light.css" %}');
-          link.setAttribute('rel', 'stylesheet');
-          link.setAttribute('media', 'all');
-          link.removeAttribute('disabled');
           document.documentElement.setAttribute('data-theme', 'editorial');
           setToggleLabel('Light');
         } else {
-          // Disable the override by clearing href and marking disabled
-          link.setAttribute('href', '');
-          link.setAttribute('media', 'not all');
-          link.setAttribute('disabled', 'disabled');
           document.documentElement.setAttribute('data-theme', 'midnight');
           setToggleLabel('Dark');
         }
