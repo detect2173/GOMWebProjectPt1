@@ -19,19 +19,25 @@ db.sqlite3
 # JetBrains / PyCharm project settings
 .idea/
 
-# VS Code settings (if ever used)
+# VS Code settings
 .vscode/
 
 # OS junk files
 .DS_Store
 Thumbs.db
 
+# Logs
+*.log
+
 # Test / coverage outputs
 .coverage
 htmlcov/
 .pytest_cache/
 .tox/
+
+# Type checker / Lint caches
 .mypy_cache/
+.dmypy.json
 .ruff_cache/
 
 # Build / dist artifacts
@@ -45,5 +51,6 @@ dist/
 *.local
 !.env.example
 
-# Logs
-*.log
+
+#git clean-preview   # shows what would be deleted
+#git clean-ignored   # deletes ignored files
