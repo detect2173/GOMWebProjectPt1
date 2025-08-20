@@ -67,7 +67,7 @@ def lead_magnet(request):
                 messages.success(request, 'Check your inbox! Your free guide is on its way.')
             else:
                 messages.info(request, 'Thanks! We saved your email. We will send the free guide shortly.')
-            return redirect('lead_thanks')
+            return redirect('free_guide_thanks')
     else:
         form = LeadMagnetForm()
     return render(request, 'sitecore/lead_magnet.html', {'form': form})
@@ -75,6 +75,16 @@ def lead_magnet(request):
 
 def lead_thanks(request):
     return render(request, 'sitecore/lead_thanks.html')
+
+
+# New aliases for clarity and new canonical URLs
+
+def free_guide(request):
+    return lead_magnet(request)
+
+
+def free_guide_thanks(request):
+    return lead_thanks(request)
 
 
 def terms(request):
