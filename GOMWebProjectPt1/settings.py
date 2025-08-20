@@ -62,6 +62,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Adds explicit Permissions-Policy header to avoid noisy console warnings from embeds/extensions
+    'sitecore.middleware.PermissionsPolicyMiddleware',
 ]
 
 ROOT_URLCONF = 'GOMWebProjectPt1.urls'

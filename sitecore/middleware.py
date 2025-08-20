@@ -1,0 +1,26 @@
+from typing import Callable
+from django.http import HttpRequest, HttpResponse
+
+
+class PermissionsPolicyMiddleware:
+    """
+    Sets explicit Permissions-Policy to avoid noisy console warnings from embeds/extensions
+    attempting to access features like the Payment Request API. This does not change any
+    app functionality; it simply declares that 'payment' is allowed, which prevents
+    Chrome's "Potential permissions policy violation" messages when third-party content
+    or extensions probe the API.
+
+    Note: The modern header name is "Permissions-Policy" (previously "Feature-Policy").
+    Grammar allows values like (self), (*), ("https://origin.example"). We use (*) to
+    allow use from any context inside this document, which is acceptable for a marketing
+    site and avoids warnings from embeds such as Calendly.
+    """
+
+    def __init__(self, get_response: Callable[[HttpRequest], HttpResponse]):
+        self.get_response = get_response
+
+    def __call__(self, request: HttpRequest) -> HttpResponse:
+        response = self.get_response(request)
+        # Allow payment feature to avoid console warnings on pages with embeds/extensions.
+        response["Permissions-Policy"] = "payment=(*)"
+        return response
