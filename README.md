@@ -3,9 +3,9 @@ Great Owl Marketing — Web Project
 This Django project provides a simple marketing site for Great Owl Marketing to showcase chatbot services, capture leads via GetResponse, and book calls via Calendly.
 
 Key Pages
-- Home: overview, CTA to lead magnet and booking
+- Home: overview, CTA to Free Guide and booking
 - Pricing: transparent pricing for Build & Handoff vs Managed Subscription
-- Lead Magnet: form to collect email/name and consent
+- Free Guide: form to collect email/name and consent
 - Book: embedded Calendly scheduler
 
 Configuration
@@ -65,7 +65,7 @@ How to set variables
   3) Click "Save" then "Restart" the application
 
 Where these are used in code
-- sitecore/views.py: the lead magnet POST will try to subscribe via GetResponse using GETRESPONSE_API_KEY and GETRESPONSE_LIST_ID; if unset, it logs a warning and continues gracefully.
+- sitecore/views.py: the Free Guide POST will try to subscribe via GetResponse using GETRESPONSE_API_KEY and GETRESPONSE_LIST_ID; if unset, it logs a warning and continues gracefully.
 - GOMWebProjectPt1/settings.py: reads CALENDLY_URL and passes it to templates for the embedded widget.
 
 Local setup via .env (recommended)
