@@ -78,12 +78,15 @@
         if(theme === THEMES.editorial){
           // Ensure the override stylesheet is enabled in a robust way
           link.setAttribute('href', '{% static "css/site.light.css" %}');
+          link.setAttribute('rel', 'stylesheet');
+          link.setAttribute('media', 'all');
           link.removeAttribute('disabled');
           document.documentElement.setAttribute('data-theme', 'editorial');
           setToggleLabel('Light');
         } else {
           // Disable the override by clearing href and marking disabled
           link.setAttribute('href', '');
+          link.setAttribute('media', 'not all');
           link.setAttribute('disabled', 'disabled');
           document.documentElement.setAttribute('data-theme', 'midnight');
           setToggleLabel('Dark');
