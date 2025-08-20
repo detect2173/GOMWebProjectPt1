@@ -188,9 +188,12 @@ img, svg { display: block; max-width: 100%; }
   border-radius: calc(var(--radius) + 2px);
   background: linear-gradient(135deg, rgba(124,77,255,0.7), rgba(75,107,251,0.6), rgba(33,201,152,0.55));
   z-index: 0; /* sits behind content to create a glow/border ring */
+  pointer-events: none; /* prevent overlay from intercepting clicks */
 }
 /* Ensure inner content stays above gradient */
 .hero-art > * { position: relative; z-index: 1; }
+/* Keep owl decorative and non-interactive */
+.hero-art::after { pointer-events: none; }
 
 /* Larger, clearer step headers and emojis */
 .how-step h4 { font-size: 18px; letter-spacing: 0.2px; }
