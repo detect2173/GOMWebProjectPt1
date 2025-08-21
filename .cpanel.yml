@@ -1,15 +1,11 @@
+# .cpanel.yml
 ---
 deployment:
   tasks:
-    # Prefer a project virtualenv if present; else fall back to python3; final fallback to cPanel's python
-    - 'PY=python3'
-    - 'if [ -x ".venv/bin/python" ]; then PY=".venv/bin/python"; elif [ -x "venv/bin/python" ]; then PY="venv/bin/python"; elif command -v python3 >/dev/null 2>&1; then PY="python3"; else PY="/usr/local/cpanel/3rdparty/bin/python3"; fi'
+    - export APPDIR=/home/greagfup/apps/great-owl
+    - export VENV=/home/greagfup/virtualenv/great-owl/3.11
 
-    # Install or update dependencies for the selected interpreter (user scope avoids permission errors)
-    - '$PY -m pip install --user -r requirements.txt || true'
-
-    # Collect static files if Django manage.py exists; ignore failure if STATICFILES not configured
-    - '[ -f manage.py ] && $PY manage.py collectstatic --noinput || true'
-
-    # Touch Passenger restart flag (untracked) to reload the app
-    - 'mkdir -p tmp && /bin/touch tmp/restart.txt'
+    - $VENV/bin/pip install --upgrade -r $APPDIR/requirements.txt
+    - cd $APPDIR && $VENV/bin/python manage.py migrate --noinput
+    - cd $APPDIR && $VENV/bin/python manage.py collectstatic --noinput
+    - /bin/touch $APPDIR/passenger_wsgi.py
