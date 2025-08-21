@@ -399,13 +399,9 @@ html[data-theme='editorial'] a:hover { color: #1534b3; }
 
 /* Tech grid overlay using masks for subtlety */
 .stage::after {
-  background:
-    linear-gradient(var(--bg), var(--bg)),
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 1px);
-  background-size: auto, 24px 24px;
-  background-position: 0 0, -1px -1px;
+  background: linear-gradient(var(--bg), var(--bg));
   mask: radial-gradient(ellipse at 60% -20%, black 30%, transparent 70%);
-  opacity: 0.45;
+  opacity: 0.22;
 }
 
 /* Film-grain noise layer for depth (applied to body to cover header too) */
