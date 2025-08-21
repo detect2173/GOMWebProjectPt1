@@ -15,7 +15,7 @@
 - Never commit directly to `main`.
 
 ### Default Behavior
-- Junie **must not** commit or push automatically.
+- Junie **must** commit or push automatically.
 - Junie should:
   1. Stage the proposed changes.
   2. Show the diff and a suggested commit message.
