@@ -54,3 +54,6 @@ dist/
 
 #git clean-preview   # shows what would be deleted
 #git clean-ignored   # deletes ignored files
+
+# Ignore Junie working assets
+.Junie/
