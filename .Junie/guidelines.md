@@ -90,3 +90,7 @@ Install:
 Notes:
 - Adopt a project-wide `.editorconfig` to ensure consistent line endings, indentation, and charset.
 - For mypy, prefer `--strict` in domain/services. Add a mypy config (e.g., `mypy.ini`) if needed to handle Django-specific typing.
+
+### Agent Runtime Hints
+- Prefer the IDE’s Git API to get branch name and status. Avoid opening the terminal for simple queries.
+- If terminal is required, you may run read-only git commands (status, branch, rev-parse, log, describe).
