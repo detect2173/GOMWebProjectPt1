@@ -127,6 +127,12 @@
         if(!wrap) return;
         var btns = wrap.querySelectorAll('.btn');
         if(btns.length < 2) return;
+        // On narrow screens, stack buttons full-width and skip equalization
+        var isNarrow = wrap.clientWidth < 520 || window.matchMedia('(max-width: 980px)').matches;
+        if(isNarrow){
+          btns.forEach(function(b){ b.style.width = '100%'; });
+          return;
+        }
         // reset inline widths first to measure natural width
         btns.forEach(function(b){ b.style.width = ''; });
         // determine max natural width

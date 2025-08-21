@@ -129,7 +129,10 @@ img, svg { display: block; max-width: 100%; }
   .grid-3 { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
   .how-steps { grid-template-columns: 1fr; }
-  .how-ctas { flex-direction: column; }
+  .how-ctas { flex-direction: column; align-items: stretch; }
+  .how-ctas .btn { width: 100%; }
+  .navbar { flex-wrap: wrap; }
+  .nav-links { flex-wrap: wrap; justify-content: flex-end; row-gap: 8px; }
 }
 
 
