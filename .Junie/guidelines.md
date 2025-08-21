@@ -97,3 +97,9 @@ Notes:
 - Adopt a project-wide `.editorconfig` to ensure consistent line endings, indentation, and charset.
 - For mypy, prefer `--strict` in domain/services. Add a mypy config (e.g., `mypy.ini`) if needed to handle
   Django-specific typing.
+
+### Agent Runtime Hints
+- Skip full repository review unless I explicitly ask for it.
+- Run at most one `git status -s -b` per task.
+- Prefer the IDE Git API over interactive terminals.
+- If a terminal command returns no output or closes, abort that step and report the command + exit code instead of retrying.
