@@ -464,3 +464,11 @@ h2::after {
   transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-2px);
   box-shadow: 0 14px 32px rgba(0,0,0,0.42);
 }
+
+
+/* Prevent any accidental tiling/repeat that could cause seams */
+body,
+.stage::before,
+.stage::after {
+  background-repeat: no-repeat !important;
+}
