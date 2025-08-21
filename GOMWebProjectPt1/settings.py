@@ -140,10 +140,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
+# Use absolute URL for static so links aren’t relative
+STATIC_URL = "/static/"
+
+# App static dirs (for development/build inputs)
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
 # Where collectstatic will gather production assets
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# IMPORTANT: Point this outside the Git repo to keep the server working tree clean.
+# Can be overridden via env var STATIC_ROOT on the server.
+STATIC_ROOT = Path(os.getenv("STATIC_ROOT", "/home/greagfup/apps/great-owl/static-collect"))
+
 # WhiteNoise static files storage for compressed, hashed files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
