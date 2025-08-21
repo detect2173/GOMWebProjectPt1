@@ -87,9 +87,78 @@ Security checklist
 That’s it! After these steps, your Django app should run on Namecheap’s shared hosting under cPanel with Passenger.
 
 
+Staging workflow (separate branch and app)
+
+Goal: Keep master (production) stable while you develop on a separate branch deployed to its own cPanel Python App.
+
+A) Create the staging branch
+1. git checkout master && git pull
+2. git checkout -b stage/next
+3. git push -u origin HEAD
+
+B) Prepare .cpanel.yml for staging
+- Option 1 (recommended): Keep different .cpanel.yml per branch.
+  On stage/next only, set these paths (example):
+  APPDIR=/home/greagfup/apps/great-owl-stage
+  VENV=/home/greagfup/virtualenv/apps/great-owl-stage/3.12
+- Keep master’s .cpanel.yml pointing at the production app paths:
+  APPDIR=/home/greagfup/apps/great-owl
+  VENV=/home/greagfup/virtualenv/apps/great-owl/3.12
+
+C) Create a new cPanel Git working copy for staging
+1. cPanel → Git Version Control → Create
+   - Clone URL: your GitHub repo URL
+   - Repository Path: /home/greagfup/apps/great-owl-stage
+   - Branch: stage/next
+   - Create
+
+D) Create the staging Python App
+1. cPanel → Setup Python App → Create Application
+   - Python version: 3.12 (same as production)
+   - Application root: /home/greagfup/apps/great-owl-stage
+   - Startup file: passenger_wsgi.py
+   - Entry point: application
+   - (Optional) Application URL: staging.greatowlmarketing.com (create a subdomain in cPanel → Domains first)
+   - Create
+   - Copy the exact virtualenv path shown at the top (e.g., /home/greagfup/virtualenv/apps/great-owl-stage/3.12) and ensure .cpanel.yml on stage/next uses this path.
+
+E) Configure staging environment variables
+- DJANGO_DEBUG=False
+- DJANGO_ALLOWED_HOSTS=staging.greatowlmarketing.com
+- DJANGO_CSRF_TRUSTED_ORIGINS=https://staging.greatowlmarketing.com
+- DJANGO_SECRET_KEY=generate-a-unique-secret
+- CALENDLY_URL=your real link
+- GETRESPONSE_API_KEY=… (optional for staging)
+- GETRESPONSE_LIST_ID=… (optional for staging)
+- LOGO_URL=/static/img/logo.png
+- STATIC_VERSION=YYYYMMDD-HHMM (set a fresh value to bust caches)
+
+F) Deploy staging via cPanel Git
+- cPanel → Git Version Control → repository at apps/great-owl-stage → Deploy
+- This runs .cpanel.yml for stage/next with the staging APPDIR/VENV paths:
+  1) $VENV/bin/pip install -r $APPDIR/requirements.txt
+  2) cd $APPDIR && $VENV/bin/python manage.py migrate --noinput
+  3) cd $APPDIR && $VENV/bin/python manage.py collectstatic --noinput
+  4) touch $APPDIR/passenger_wsgi.py (reload)
+
+G) Verify staging
+- Open https://staging.greatowlmarketing.com/static/css/site.css → HTTP 200, Content-Type: text/css
+- Visit staging home page. Hard refresh (Ctrl+F5). The templates append ?v={{ STATIC_VERSION }} to the stylesheet to avoid stale caches.
+
+H) Day-to-day
+- Commit to stage/next and deploy the staging repo to test changes.
+- When ready, merge stage/next → master, then cPanel Git → Deploy production.
+
+Notes on virtualenv alignment
+- Your cPanel Python App banner shows the exact venv path. Ensure the .cpanel.yml VENV matches it per environment (prod vs staging). If you change Python versions in the app, update .cpanel.yml accordingly.
+
+Troubleshooting for staging
+- If Deploy fails: open the deploy log in cPanel Git and copy the error. Common issues: wrong VENV path, missing migrate/collectstatic, missing env vars.
+- If CSS doesn’t load: ensure STATIC_URL is "/static/", run collectstatic, restart; verify /static/css/site.css returns 200.
+
 
 Practical values for greatowlmarketing.com
 - DJANGO_ALLOWED_HOSTS = greatowlmarketing.com,www.greatowlmarketing.com
 - DJANGO_CSRF_TRUSTED_ORIGINS = https://greatowlmarketing.com,https://www.greatowlmarketing.com
 
-Note: Keep localhost and 127.0.0.1 in your local .env only; on the server, you typically only set your real domains.
+Note: Keep localhost and 127.0.0.1 in your local .env only; on the server, set only real domains.
