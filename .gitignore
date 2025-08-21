@@ -120,3 +120,6 @@ dist/
 
 # Ignore collected static (server-generated)
 staticfiles/
+
+# Ignore uploaded media (server-generated/uploads)
+media/

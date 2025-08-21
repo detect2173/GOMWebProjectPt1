@@ -154,6 +154,11 @@ STATIC_ROOT = Path(os.getenv("STATIC_ROOT", "/home/greagfup/apps/great-owl/stati
 # WhiteNoise static files storage for compressed, hashed files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# Media files (user uploads)
+MEDIA_URL = "/media/"
+# Store media outside the Git repo to keep server working tree clean; allow override via env
+MEDIA_ROOT = Path(os.getenv("MEDIA_ROOT", "/home/greagfup/apps/great-owl/media"))
+
 # Marketing integrations (configure via environment variables)
 GETRESPONSE_API_KEY = os.getenv("GETRESPONSE_API_KEY", "")
 GETRESPONSE_LIST_ID = os.getenv("GETRESPONSE_LIST_ID", "")
