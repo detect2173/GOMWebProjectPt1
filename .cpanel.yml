@@ -2,10 +2,8 @@
 ---
 deployment:
   tasks:
-    - export APPDIR=/home/greagfup/apps/great-owl
-    - export VENV=/home/greagfup/virtualenv/great-owl/3.11
+    - 'APPDIR=/home/greagfup/apps/great-owl; VENV=/home/greagfup/virtualenv/apps/great-owl/3.12; $VENV/bin/pip install --upgrade -r $APPDIR/requirements.txt'
+    - 'APPDIR=/home/greagfup/apps/great-owl; VENV=/home/greagfup/virtualenv/apps/great-owl/3.12; cd $APPDIR && $VENV/bin/python manage.py migrate --noinput'
+    - 'APPDIR=/home/greagfup/apps/great-owl; VENV=/home/greagfup/virtualenv/apps/great-owl/3.12; cd $APPDIR && $VENV/bin/python manage.py collectstatic --noinput'
+    - 'APPDIR=/home/greagfup/apps/great-owl; /bin/touch $APPDIR/passenger_wsgi.py'
 
-    - $VENV/bin/pip install --upgrade -r $APPDIR/requirements.txt
-    - cd $APPDIR && $VENV/bin/python manage.py migrate --noinput
-    - cd $APPDIR && $VENV/bin/python manage.py collectstatic --noinput
-    - /bin/touch $APPDIR/passenger_wsgi.py
