@@ -81,9 +81,10 @@ img, svg { display: block; max-width: 100%; }
   position: relative;
 }
 .hero-art::after {
-  content: "🦉"; position: absolute; right: 24px; top: 18px; font-size: 56px; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.45));
+  content: "🦉"; position: absolute; right: 20px; bottom: 22px; font-size: 56px; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.45));
 }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+/* Reserve space to the right for the owl so it doesn't overlap buttons */
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; padding-right: 88px; }
 
 /* How it works (Option #3) */
 .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 18px; }
@@ -170,7 +171,8 @@ img, svg { display: block; max-width: 100%; }
 
 /* Owl sizing on narrow screens so it doesn't crowd content */
 @media (max-width: 980px) {
-  .hero-art::after { font-size: 40px; right: 14px; top: 10px; }
+  .hero-art::after { font-size: 40px; right: 12px; bottom: 14px; }
+  .hero-art .how-ctas { padding-right: 64px; }
 }
 
 

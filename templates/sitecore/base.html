@@ -119,5 +119,33 @@
       });
     })();
   </script>
+  <script>
+    // Equalize widths of the two buttons inside the hero-art footer (how-ctas)
+    (function(){
+      function equalizeHeroCtas(){
+        var wrap = document.querySelector('.hero-art .how-ctas');
+        if(!wrap) return;
+        var btns = wrap.querySelectorAll('.btn');
+        if(btns.length < 2) return;
+        // reset inline widths first to measure natural width
+        btns.forEach(function(b){ b.style.width = ''; });
+        // determine max natural width
+        var max = 0;
+        btns.forEach(function(b){ max = Math.max(max, b.offsetWidth); });
+        // apply equal width
+        btns.forEach(function(b){ b.style.width = max + 'px'; });
+      }
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', equalizeHeroCtas);
+      } else {
+        equalizeHeroCtas();
+      }
+      window.addEventListener('resize', function(){
+        // lightweight debounce
+        clearTimeout(window.__heroCtasT);
+        window.__heroCtasT = setTimeout(equalizeHeroCtas, 100);
+      });
+    })();
+  </script>
 </body>
 </html>
