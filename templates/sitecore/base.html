@@ -39,7 +39,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main class="stage">
     <div class="container section">
       {% if messages %}
         <div class="messages" role="status" aria-live="polite">
@@ -99,6 +99,24 @@
           apply(next);
         });
       }
+    })();
+  </script>
+  <script>
+    (function(){
+      var cards = document.querySelectorAll('.card-tilt');
+      if(!cards.length) return;
+      function tilt(el, e){
+        var r = el.getBoundingClientRect();
+        var cx = e.clientX - r.left, cy = e.clientY - r.top;
+        var rx = ((cy / r.height) - 0.5) * -6;
+        var ry = ((cx / r.width) - 0.5) *  6;
+        el.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-2px)';
+      }
+      function reset(el){ el.style.transform = ''; }
+      cards.forEach(function(c){
+        c.addEventListener('mousemove', function(e){ tilt(c, e); });
+        c.addEventListener('mouseleave', function(){ reset(c); });
+      });
     })();
   </script>
 </body>
