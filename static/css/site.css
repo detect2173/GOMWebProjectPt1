@@ -80,11 +80,9 @@ img, svg { display: block; max-width: 100%; }
   box-shadow: var(--shadow);
   position: relative;
 }
-.hero-art::after {
-  content: "🦉"; position: absolute; right: 20px; bottom: 22px; font-size: 56px; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.45));
-}
-/* Reserve space to the right for the owl so it doesn't overlap buttons */
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; padding-right: 88px; }
+/* Owl moved into DOM next to CTAs */
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+.hero-owl { display: inline-flex; align-items: center; justify-content: center; font-size: 56px; line-height: 1; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.45)); margin-left: 8px; pointer-events: none; }
 
 /* How it works (Option #3) */
 .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 18px; }
@@ -171,8 +169,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* Owl sizing on narrow screens so it doesn't crowd content */
 @media (max-width: 980px) {
-  .hero-art::after { font-size: 40px; right: 12px; bottom: 14px; }
-  .hero-art .how-ctas { padding-right: 64px; }
+  .hero-owl { font-size: 40px; }
 }
 
 
@@ -195,7 +192,7 @@ img, svg { display: block; max-width: 100%; }
 /* Ensure inner content stays above gradient */
 .hero-art > * { position: relative; z-index: 1; }
 /* Keep owl decorative and non-interactive */
-.hero-art::after { pointer-events: none; }
+.hero-owl { pointer-events: none; }
 
 /* Larger, clearer step headers and emojis */
 .how-step h4 { font-size: 18px; letter-spacing: 0.2px; }
