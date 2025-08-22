@@ -28,7 +28,10 @@ except Exception:
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-!#our157cztlhwk9^_6l9%8ujcj+qjn=6p^fq4l7uik9^+*rpf"
+# Prefer DJANGO_SECRET_KEY from the environment in production; fall back for local/dev
+SECRET_KEY = os.getenv(
+    "DJANGO_SECRET_KEY", "django-insecure-!#our157cztlhwk9^_6l9%8ujcj+qjn=6p^fq4l7uik9^+*rpf"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
