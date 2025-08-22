@@ -164,4 +164,29 @@ Practical values for greatowlmarketing.com
 - STATIC_ROOT = /home/greagfup/static-collect/great-owl   (or set STATIC_MODE to the same path)
 - MEDIA_ROOT  = /home/greagfup/media/great-owl           (or set MEDIA_MODE to the same path)
 
+500 checklist on Namecheap
+1) Setup Python App → open your app.
+2) Environment variables:
+   - DJANGO_DEBUG=False
+   - DJANGO_ALLOWED_HOSTS=greatowlmarketing.com,www.greatowlmarketing.com
+   - DJANGO_CSRF_TRUSTED_ORIGINS=https://greatowlmarketing.com,https://www.greatowlmarketing.com
+   - STATIC_MODE=/home/greagfup/static-collect/great-owl
+   - MEDIA_MODE=/home/greagfup/media/great-owl
+   - GETRESPONSE_API_KEY=… (optional)
+   - GETRESPONSE_LIST_ID=… (optional)
+   - CALENDLY_URL=https://calendly.com/phineasjholdings-info/30min
+3) Ensure folders exist and are writable by the app user:
+   mkdir -p /home/greagfup/static-collect/great-owl
+   mkdir -p /home/greagfup/media/great-owl
+4) In the app’s virtualenv:
+   pip install -r requirements.txt
+   python manage.py migrate --noinput
+   python manage.py collectstatic --noinput
+5) Restart the Python app (button in cPanel).
+6) Verify:
+   - https://greatowlmarketing.com/healthz/ → should return "ok"
+   - https://greatowlmarketing.com/static/css/site.css → HTTP 200 CSS
+
+If it still returns 500, open Passenger error log (cPanel → Errors or app log) and copy the latest traceback to share.
+
 Note: Keep localhost and 127.0.0.1 in your local .env only; on the server, set only real domains.

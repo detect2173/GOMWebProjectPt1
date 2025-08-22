@@ -137,3 +137,10 @@ def smartpro_agreement(request: HttpRequest) -> HttpResponse:
     We'll replace its contents when the embed code is provided.
     """
     return render(request, "smartpro-agreement.html")
+
+
+def healthz(request: HttpRequest) -> HttpResponse:
+    """Lightweight health check endpoint for uptime monitors and debugging 500s.
+    Returns 200 OK with a short body and no DB access.
+    """
+    return HttpResponse("ok", content_type="text/plain")
