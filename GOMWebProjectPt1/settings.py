@@ -148,8 +148,10 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Where collectstatic will gather production assets
 # IMPORTANT: Point this outside the Git repo to keep the server working tree clean.
-# Can be overridden via env var STATIC_ROOT on the server.
-STATIC_ROOT = Path(os.getenv("STATIC_ROOT", "/home/greagfup/apps/great-owl/static-collect"))
+# Accept both the standard STATIC_ROOT and an alias STATIC_MODE for convenience.
+_static_root = os.getenv("STATIC_ROOT") or os.getenv("STATIC_MODE") or \
+    "/home/greagfup/apps/great-owl/static-collect"
+STATIC_ROOT = Path(_static_root)
 
 # WhiteNoise static files storage for compressed, hashed files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -157,7 +159,10 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Media files (user uploads)
 MEDIA_URL = "/media/"
 # Store media outside the Git repo to keep server working tree clean; allow override via env
-MEDIA_ROOT = Path(os.getenv("MEDIA_ROOT", "/home/greagfup/apps/great-owl/media"))
+# Accept both the standard MEDIA_ROOT and an alias MEDIA_MODE for convenience.
+_media_root = os.getenv("MEDIA_ROOT") or os.getenv("MEDIA_MODE") or \
+    "/home/greagfup/apps/great-owl/media"
+MEDIA_ROOT = Path(_media_root)
 
 # Marketing integrations (configure via environment variables)
 GETRESPONSE_API_KEY = os.getenv("GETRESPONSE_API_KEY", "")

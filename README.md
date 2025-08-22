@@ -27,6 +27,13 @@ Running locally
 Deployment
 - See DEPLOYMENT.md for a step-by-step Namecheap (cPanel) guide using Passenger (Setup Python App).
 
+Static and media paths (production)
+- Set STATIC_ROOT to the absolute folder where collectstatic should place files (outside your Git repo), or use alias STATIC_MODE.
+- Set MEDIA_ROOT to the absolute folder for uploads (outside your Git repo), or use alias MEDIA_MODE.
+- Example (Namecheap):
+  - STATIC_ROOT=/home/greagfup/static-collect/great-owl
+  - MEDIA_ROOT=/home/greagfup/media/great-owl
+
 Notes
 - GetResponse integration is implemented with a minimal HTTP call in sitecore/views.py. If no API key/list is set, it will skip the external call gracefully while storing the lead locally.
 - Static files are served via WhiteNoise in production; run collectstatic.
