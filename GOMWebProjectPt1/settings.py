@@ -153,8 +153,10 @@ _static_root = os.getenv("STATIC_ROOT") or os.getenv("STATIC_MODE") or \
     "/home/greagfup/apps/great-owl/static-collect"
 STATIC_ROOT = Path(_static_root)
 
-# WhiteNoise static files storage for compressed, hashed files
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# WhiteNoise static files storage
+# Use non-manifest storage to avoid 500s if collectstatic hasn't been rerun after adding new assets
+# (Manifest storage raises during template rendering when a file is missing from the manifest.)
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Media files (user uploads)
 MEDIA_URL = "/media/"
