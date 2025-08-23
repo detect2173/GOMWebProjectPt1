@@ -163,10 +163,10 @@ LOGO_URL = os.getenv("LOGO_URL", "/static/img/logo.png")
 # Static asset version for cache-busting. Prefer setting via env (STATIC_VERSION) on deploy.
 # Fallback uses UTC timestamp at process start, so each app reload updates the version.
 try:
-    from datetime import datetime
+    from datetime import datetime, timezone
 
     STATIC_VERSION = os.getenv(
-        "STATIC_VERSION", datetime.utcnow().strftime("%Y%m%d%H%M")
+        "STATIC_VERSION", datetime.now(timezone.utc).strftime("%Y%m%d%H%M")
     )
 except Exception:
     STATIC_VERSION = os.getenv("STATIC_VERSION", "1")
