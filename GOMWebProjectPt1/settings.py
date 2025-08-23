@@ -180,17 +180,31 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
+        # Write to a file in the app root (useful locally and in hosts that allow writing).
         "file": {
             "level": "ERROR",
             "class": "logging.FileHandler",
             "filename": BASE_DIR / "error.log",
         },
+        # Also send errors to stderr so Passenger/WSGI hosts capture them into stderr.log.
+        "console": {
+            "level": "ERROR",
+            "class": "logging.StreamHandler",
+            "stream": "ext://sys.stderr",
+        },
     },
     "loggers": {
+        # Core Django errors
         "django": {
-            "handlers": ["file"],
+            "handlers": ["file", "console"],
             "level": "ERROR",
             "propagate": True,
+        },
+        # Request/response cycle errors (high-signal 500s end up here)
+        "django.request": {
+            "handlers": ["file", "console"],
+            "level": "ERROR",
+            "propagate": False,
         },
     },
 }
