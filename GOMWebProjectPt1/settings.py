@@ -144,8 +144,17 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
-# Where collectstatic will gather production assets
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# Where collectstatic will gather production assets. Allow moving outside repo via env.
+# Example (cPanel): DJANGO_STATIC_ROOT=/home/<user>/apps/great-owl/staticfiles
+_static_root = os.getenv("DJANGO_STATIC_ROOT", str(BASE_DIR / "staticfiles"))
+from pathlib import Path as _Path  # local alias to avoid shadowing
+STATIC_ROOT = _Path(_static_root)
+# Ensure the directory exists so WhiteNoise does not warn on startup.
+try:
+    STATIC_ROOT.mkdir(parents=True, exist_ok=True)
+except Exception:
+    # Never fail app startup over a directory creation failure.
+    pass
 # WhiteNoise static files storage for compressed, hashed files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # In production, if the manifest is missing/outdated, do not crash with 500; serve files instead.
