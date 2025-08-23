@@ -146,6 +146,8 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 # WhiteNoise static files storage for compressed, hashed files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# In production, if the manifest is missing/outdated, do not crash with 500; serve files instead.
+WHITENOISE_MANIFEST_STRICT = False
 
 # Marketing integrations (configure via environment variables)
 GETRESPONSE_API_KEY = os.getenv("GETRESPONSE_API_KEY", "")
