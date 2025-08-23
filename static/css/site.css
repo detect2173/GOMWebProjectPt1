@@ -80,11 +80,10 @@ img, svg { display: block; max-width: 100%; }
   box-shadow: var(--shadow);
   position: relative;
 }
-/* Owl moved into DOM next to CTAs */
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; align-items: center; }
-/* Centered owl image below the buttons */
-.hero-owl { display: block; width: 120px; height: auto; margin: 10px auto 0; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.45)); pointer-events: none; }
-.how-ctas .hero-owl { order: 3; flex-basis: 100%; }
+.hero-art::after {
+  content: "🦉"; position: absolute; right: 24px; top: 18px; font-size: 56px; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.45));
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
 
 /* How it works (Option #3) */
 .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 18px; }
@@ -131,10 +130,7 @@ img, svg { display: block; max-width: 100%; }
   .grid-3 { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
   .how-steps { grid-template-columns: 1fr; }
-  .how-ctas { flex-direction: column; align-items: stretch; }
-  .how-ctas .btn { width: 100%; }
-  .navbar { flex-wrap: wrap; }
-  .nav-links { flex-wrap: wrap; justify-content: flex-end; row-gap: 8px; }
+  .how-ctas { flex-direction: column; }
 }
 
 
@@ -174,7 +170,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* Owl sizing on narrow screens so it doesn't crowd content */
 @media (max-width: 980px) {
-  .hero-owl { font-size: 40px; align-self: flex-end; margin-left: 0; }
+  .hero-art::after { font-size: 40px; right: 14px; top: 10px; }
 }
 
 
@@ -197,7 +193,7 @@ img, svg { display: block; max-width: 100%; }
 /* Ensure inner content stays above gradient */
 .hero-art > * { position: relative; z-index: 1; }
 /* Keep owl decorative and non-interactive */
-.hero-owl { pointer-events: none; }
+.hero-art::after { pointer-events: none; }
 
 /* Larger, clearer step headers and emojis */
 .how-step h4 { font-size: 18px; letter-spacing: 0.2px; }
@@ -378,99 +374,4 @@ html[data-theme='editorial'] a:hover { color: #1534b3; }
   --line: #e6eaf3;
   --white: #0e0f13;
   --shadow: 0 10px 30px rgba(33, 37, 41, 0.08);
-}
-
-
-/* ===== Tech Vibe Background Layer (animated gradient mesh + grid + noise) ===== */
-.stage { position: relative; isolation: isolate; }
-.stage::before,
-.stage::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -2; }
-
-/* Animated gradient mesh (very subtle, low alpha) */
-.stage::before {
-  background:
-    radial-gradient(800px 500px at 10% 0%, rgba(124,77,255,0.18), transparent 60%),
-    radial-gradient(900px 600px at 90% 20%, rgba(75,107,251,0.16), transparent 65%),
-    radial-gradient(700px 500px at 50% 100%, rgba(33,201,152,0.14), transparent 60%);
-  animation: mesh-drift 18s ease-in-out infinite alternate;
-  filter: saturate(120%);
-}
-
-@keyframes mesh-drift {
-  0%   { transform: translate3d(0,0,0) scale(1); }
-  100% { transform: translate3d(0,-10px,0) scale(1.02); }
-}
-
-/* Tech grid overlay using masks for subtlety */
-.stage::after {
-  background: linear-gradient(var(--bg), var(--bg));
-  mask: radial-gradient(ellipse at 60% -20%, black 30%, transparent 70%);
-  opacity: 0.22;
-}
-
-/* Film-grain noise layer for depth (applied to body to cover header too) */
-body::after {
-  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
-  background-image: url("data:image/svg+xml;utf8,\
-    <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>\
-      <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0.05'/></feComponentTransfer></filter>\
-      <rect width='100%' height='100%' filter='url(%23n)'/>\
-    </svg>");
-  opacity: 0.07; mix-blend-mode: overlay; image-rendering: pixelated;
-}
-
-/******* Respect reduced motion ******/
-@media (prefers-reduced-motion: reduce) {
-  .stage::before { animation: none; }
-}
-
-/* Neon pulse for primary CTA */
-.btn-primary {
-  box-shadow: 0 8px 24px rgba(75,107,251,0.45), 0 0 0 0 rgba(124,77,255,0.0);
-}
-.btn-primary:hover {
-  box-shadow: 0 10px 30px rgba(75,107,251,0.55), 0 0 0 6px rgba(124,77,255,0.12);
-  transform: translateY(-1px);
-}
-
-/* Gradient underline for section headings */
-h2 {
-  position: relative; display: inline-block; margin-bottom: 10px;
-}
-h2::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 3px; border-radius: 3px;
-  background: linear-gradient(90deg, var(--brand), var(--accent));
-  opacity: 0.85;
-}
-
-/* Section divider line */
-.section { position: relative; }
-.section + .section::before {
-  content: ""; position: absolute; top: -1px; left: 50%; width: min(1120px, 92%); height: 1px; transform: translateX(-50%);
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
-  opacity: 0.6;
-}
-
-/* Hero accent glow refinement */
-.hero-art { transform-style: preserve-3d; }
-.hero-art:hover { transform: translateZ(0) scale(1.005); }
-.hero-art::before { filter: blur(0.3px) saturate(110%); }
-
-/* Slight 3D tilt on hover (JS-free baseline) */
-.card-tilt {
-  transform: perspective(800px) rotateX(0) rotateY(0) translateY(0);
-  transform-style: preserve-3d;
-  transition: transform .18s ease, box-shadow .2s ease;
-}
-.card-tilt:hover {
-  transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-2px);
-  box-shadow: 0 14px 32px rgba(0,0,0,0.42);
-}
-
-
-/* Prevent any accidental tiling/repeat that could cause seams */
-body,
-.stage::before,
-.stage::after {
-  background-repeat: no-repeat !important;
 }

@@ -28,10 +28,7 @@ except Exception:
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# Prefer DJANGO_SECRET_KEY from the environment in production; fall back for local/dev
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY", "django-insecure-!#our157cztlhwk9^_6l9%8ujcj+qjn=6p^fq4l7uik9^+*rpf"
-)
+SECRET_KEY = "django-insecure-!#our157cztlhwk9^_6l9%8ujcj+qjn=6p^fq4l7uik9^+*rpf"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
@@ -143,29 +140,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-# Use absolute URL for static so links aren’t relative
-STATIC_URL = "/static/"
-
-# App static dirs (for development/build inputs)
+STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
-
 # Where collectstatic will gather production assets
-# IMPORTANT: Point this outside the Git repo to keep the server working tree clean.
-# Accept both the standard STATIC_ROOT and an alias STATIC_MODE for convenience.
-_static_root = os.getenv("STATIC_ROOT") or os.getenv("STATIC_MODE") or \
-    "/home/greagfup/apps/great-owl/static-collect"
-STATIC_ROOT = Path(_static_root)
-
-# WhiteNoise static files storage (non-manifest) to avoid runtime 500s if manifest is missing
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-
-# Media files (user uploads)
-MEDIA_URL = "/media/"
-# Store media outside the Git repo to keep server working tree clean; allow override via env
-# Accept both the standard MEDIA_ROOT and an alias MEDIA_MODE for convenience.
-_media_root = os.getenv("MEDIA_ROOT") or os.getenv("MEDIA_MODE") or \
-    "/home/greagfup/apps/great-owl/media"
-MEDIA_ROOT = Path(_media_root)
+STATIC_ROOT = BASE_DIR / "staticfiles"
+# WhiteNoise static files storage for compressed, hashed files
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Marketing integrations (configure via environment variables)
 GETRESPONSE_API_KEY = os.getenv("GETRESPONSE_API_KEY", "")

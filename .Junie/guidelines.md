@@ -10,51 +10,42 @@
 ## 9.1) VCS & Commit Policy (Junie)
 
 ### Branching
-- Primary branch: master.
-- If working on another branch, commit and push to the **current branch** (HEAD) unless I explicitly ask to switch.
+- All work must happen on feature branches:
+  - `feat/<ticket>`, `fix/<bug>`, `chore/<topic>`.
+- Never commit directly to `main`.
 
-### Default Behavior (Automatic)
-Junie must automatically commit and push every change **without waiting for approval**, using the change summary as the commit message.
+### Default Behavior
+- Junie **must not** commit or push automatically.
+- Junie should:
+  1. Stage the proposed changes.
+  2. Show the diff and a suggested commit message.
+  3. Wait for explicit approval before committing.
+- After approval:
+  - Commit only the staged change.
+  - Push the branch (`git push -u origin HEAD`).
 
-For each edit:
-1. Stage only relevant changes (respect `.gitignore`).
-2. Build the commit message from the task/change summary using this format: `type(scope): concise summary [junie]`
-   - If type(scope) isn’t specified by me, infer a sensible type: `feat|fix|chore|docs|test|refactor`.
-3. Run:
-   - `git add -A`
-   - `git commit -m "<message>"`
-   - `git push origin HEAD`
+### Commit Format
+type(scope): concise summary [junie]
 
-### Commit Message Examples
+= What changed
+
+- Why it changed
+
+- Notes: migrations/perf/security
+
+
+Examples:
 - `feat(api): add idempotency middleware [junie]`
 - `fix(repo): tighten .gitignore [junie]`
-- `chore(deploy): touch passenger restart [junie]`
 
 ### Push Rules
-- Push **immediately** after each commit (no batching).
-- Never force-push unless I explicitly say `force-push: yes`.
-- If the push is rejected due to remote updates, run `git pull --rebase` and **retry once**; if it still fails, stop and report.
+- Push only after tests and linters pass locally.
+- Do not force-push unless explicitly instructed.
+- Open a PR for merge into `main`.
 
 ### Safety
-- Never commit secrets or local artifacts: `.env*`, `db.sqlite3`, `__pycache__/`, `*.pyc`, `*.log`, `.idea/`, `.vscode/`, `dist/`, `build/`, `*.egg-info/`.
-- Honor `.gitignore` at all times.
-- If the change includes **migrations** or **requirements** updates, include a note at the end of the commit body:
-  - `Notes: migrations` / `Notes: deps`
-- If a commit would include any of the banned files above, exclude them and proceed; then report what was skipped.
-
-### Rollback
-- If the last commit needs to be undone on request:
-  - `git revert HEAD` (preferred) → push.
-- Only use history-editing commands (`reset`, `rebase`, `push --force`) if I explicitly ask.
-
-### Action Allowlist
-In **Settings → Tools → Junie → Action Allowlist**, add a **Terminal Rule** with this regex to allow the exact Git commands Junie needs:
-
-`^git (status|branch|rev-parse|log|describe|add|commit|pull|push)(\b.*)?$`
-
-(Or split into two rules for stricter control:)
-- Read-only: `^git (status|branch|rev-parse|log|describe)(\b.*)?$`
-- Write actions: `^git (add|commit|pull|push)(\b.*)?$`
+- IDE settings: disable “Commit and Push” as default, and disable “Auto-update if Push Rejected.”
+- Server settings: protect `main` branch (require PR and status checks).
 
 ---
 
@@ -99,7 +90,3 @@ Install:
 Notes:
 - Adopt a project-wide `.editorconfig` to ensure consistent line endings, indentation, and charset.
 - For mypy, prefer `--strict` in domain/services. Add a mypy config (e.g., `mypy.ini`) if needed to handle Django-specific typing.
-
-### Agent Runtime Hints
-- Prefer the IDE’s Git API to get branch name and status. Avoid opening the terminal for simple queries.
-- If terminal is required, you may run read-only git commands (status, branch, rev-parse, log, describe).
