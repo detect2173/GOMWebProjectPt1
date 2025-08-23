@@ -35,8 +35,10 @@ DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
 
 # Comma-separated list, e.g. "example.com,www.example.com"
 _allowed = os.getenv("DJANGO_ALLOWED_HOSTS", "").strip()
+# Default to wildcard to prevent DisallowedHost errors if env is missing in prod.
+# For stricter security, set DJANGO_ALLOWED_HOSTS in the hosting environment.
 ALLOWED_HOSTS = (
-    [h.strip() for h in _allowed.split(",") if h.strip()] if _allowed else []
+    [h.strip() for h in _allowed.split(",") if h.strip()] if _allowed else ["*"]
 )
 # Ease local dev/tests: allow Django test client host when DEBUG
 if DEBUG and "testserver" not in ALLOWED_HOSTS:
