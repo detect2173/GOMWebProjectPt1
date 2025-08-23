@@ -22,10 +22,15 @@ class PermissionsPolicyMiddleware:
 
     def __call__(self, request: HttpRequest) -> HttpResponse:
         response = self.get_response(request)
-        # Allow payment feature to avoid console warnings on pages with embeds/extensions.
-        # Send both modern and legacy headers with broadly compatible syntax.
-        # Newer syntax (Permissions-Policy): allow all origins
-        response["Permissions-Policy"] = "payment=*"
-        # Legacy header (Feature-Policy): broad allow for compatibility with older Chromium
-        response["Feature-Policy"] = "payment *"
+        # Add headers defensively; never let a header formatting issue break the response.
+        try:
+            # Allow payment feature to avoid console warnings on pages with embeds/extensions.
+            # Send both modern and legacy headers with broadly compatible syntax.
+            # Newer syntax (Permissions-Policy): allow all origins
+            response["Permissions-Policy"] = "payment=*"
+            # Legacy header (Feature-Policy): broad allow for compatibility with older Chromium
+            response["Feature-Policy"] = "payment *"
+        except Exception:
+            # Silently ignore header set failures; functional content must still be served.
+            pass
         return response
