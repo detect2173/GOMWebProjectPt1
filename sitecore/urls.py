@@ -26,4 +26,6 @@ urlpatterns = [
     path(
         "smartpro-agreement.html", views.smartpro_agreement, name="smartpro_agreement"
     ),
+    # Health check
+    path("healthz/", views.healthz, name="healthz"),
 ]

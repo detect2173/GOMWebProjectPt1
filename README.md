@@ -27,6 +27,13 @@ Running locally
 Deployment
 - See DEPLOYMENT.md for a step-by-step Namecheap (cPanel) guide using Passenger (Setup Python App).
 
+Static and media paths (production)
+- Set STATIC_ROOT to the absolute folder where collectstatic should place files (outside your Git repo), or use alias STATIC_MODE.
+- Set MEDIA_ROOT to the absolute folder for uploads (outside your Git repo), or use alias MEDIA_MODE.
+- Example (Namecheap):
+  - STATIC_ROOT=/home/greagfup/static-collect/great-owl
+  - MEDIA_ROOT=/home/greagfup/media/great-owl
+
 Notes
 - GetResponse integration is implemented with a minimal HTTP call in sitecore/views.py. If no API key/list is set, it will skip the external call gracefully while storing the lead locally.
 - Static files are served via WhiteNoise in production; run collectstatic.
@@ -77,4 +84,13 @@ Local setup via .env (recommended)
 
 Namecheap cPanel setup
 - In Setup Python App > Environment variables, add your real values for GETRESPONSE_API_KEY and GETRESPONSE_LIST_ID.
+- Set production env vars:
+  - DJANGO_DEBUG=False
+  - DJANGO_ALLOWED_HOSTS=greatowlmarketing.com,www.greatowlmarketing.com
+  - DJANGO_CSRF_TRUSTED_ORIGINS=https://greatowlmarketing.com,https://www.greatowlmarketing.com
+  - STATIC_MODE=/home/greagfup/static-collect/great-owl
+  - MEDIA_MODE=/home/greagfup/media/great-owl
+  - CALENDLY_URL=https://calendly.com/phineasjholdings-info/30min
+- After any env changes: Restart the Python app in cPanel.
+- Health check: https://greatowlmarketing.com/healthz/ should return "ok".
 - Keep your keys private; never commit them to the repository.

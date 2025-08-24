@@ -1,5 +1,4 @@
 ## 9) Style & Quality Gates
-
 - Black, isort, Ruff; adopt `.editorconfig`.
 - Type hints on public functions; `mypy --strict` for domain/services.
 - Pre-commit hooks are mandatory:  
@@ -11,50 +10,46 @@
 ## 9.1) VCS & Commit Policy (Junie)
 
 ### Branching
-
-- All work happens directly on the `master` branch.
-- No feature branches are required for this workflow.
+- All work must happen on feature branches:
+  - `feat/<ticket>`, `fix/<bug>`, `chore/<topic>`.
+- Never commit directly to `main`.
 
 ### Default Behavior
-
-- Junie **must automatically commit and push each change**.
-- For every file modification:
-    1. Stage only the relevant change.
-    2. Commit immediately using the change summary as the commit message.
-    3. Push directly to `origin/master`.
+- Junie **must not** commit or push automatically.
+- Junie should:
+  1. Stage the proposed changes.
+  2. Show the diff and a suggested commit message.
+  3. Wait for explicit approval before committing.
+- After approval:
+  - Commit only the staged change.
+  - Push the branch (`git push -u origin HEAD`).
 
 ### Commit Format
-
 type(scope): concise summary [junie]
 
-- What changed
+= What changed
+
 - Why it changed
+
 - Notes: migrations/perf/security
 
-**Examples:**
 
+Examples:
 - `feat(api): add idempotency middleware [junie]`
-- `fix(repo): update .gitignore to exclude pyc files [junie]`
-- `chore(deploy): restart Passenger after staticfiles collect [junie]`
+- `fix(repo): tighten .gitignore [junie]`
 
 ### Push Rules
-
-- Push immediately after every commit (no batching).
-- Never skip or delay commits — every edit should be traceable.
+- Push only after tests and linters pass locally.
 - Do not force-push unless explicitly instructed.
+- Open a PR for merge into `main`.
 
 ### Safety
-
-- Exclude untracked/ignored files (`db.sqlite3`, `__pycache__`, logs, IDE configs, etc.) by honoring `.gitignore`.
-- Do not commit secrets, `.env`, or compiled artifacts.
-- For schema or migration changes, include clear notes in the commit message.
-- If a change could break deploys (e.g., settings, dependencies, schema), Junie must **pause and confirm before pushing
-  **.
+- IDE settings: disable “Commit and Push” as default, and disable “Auto-update if Push Rejected.”
+- Server settings: protect `main` branch (require PR and status checks).
 
 ---
 
 ## 9.2) Pre-commit Guardrails
-
 Use `pre-commit` to block invalid commits. Required hooks: black, isort, ruff, mypy, pytest -q.
 
 ```yaml
@@ -93,7 +88,5 @@ Install:
 - pre-commit install
 
 Notes:
-
 - Adopt a project-wide `.editorconfig` to ensure consistent line endings, indentation, and charset.
-- For mypy, prefer `--strict` in domain/services. Add a mypy config (e.g., `mypy.ini`) if needed to handle
-  Django-specific typing.
+- For mypy, prefer `--strict` in domain/services. Add a mypy config (e.g., `mypy.ini`) if needed to handle Django-specific typing.

@@ -40,6 +40,7 @@
       <div class="how-ctas">
         <a class="btn btn-primary" href="/book/" aria-label="Book a call to get your custom bot">Get Your Custom Bot</a>
         <a class="btn btn-ghost" href="{% url 'free_guide' %}" aria-label="Download the Free Guide">Download the Free Guide</a>
+        <img src="{% static 'img/hero-owl.png' %}" alt="Great Owl mascot" class="hero-owl" />
       </div>
     </div>
   </div>
@@ -47,15 +48,15 @@
 
 <section class="section">
   <div class="grid-3">
-    <div class="card">
+    <div class="card card-tilt">
       <h3>Discovery</h3>
       <p>Map your customer journey, offers, and success metrics so the bot does real work for your business.</p>
     </div>
-    <div class="card">
+    <div class="card card-tilt">
       <h3>Build</h3>
       <p>Design flows and connect Scheduling, Email/Autoresponder, SMS, and CRM using best practices.</p>
     </div>
-    <div class="card">
+    <div class="card card-tilt">
       <h3>Launch & Optimize</h3>
       <p>Deploy to FB/IG, monitor performance, and refine to improve conversions every month.</p>
     </div>
@@ -83,7 +84,7 @@
   <h2>Book a Call</h2>
   <p>Pick a time that works for you:</p>
   <div class="card" style="padding:0; overflow:hidden;">
-    <div class="calendly-inline-widget" data-url="{{ calendly_url }}" style="min-width:320px;height:630px;"></div>
+    <div class="calendly-inline-widget" data-url="{{ calendly_url }}" style="min-width:320px;height:800px;"></div>
   </div>
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </section>

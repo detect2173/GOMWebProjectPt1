@@ -14,13 +14,36 @@ logger = logging.getLogger(__name__)
 
 
 def home(request: HttpRequest) -> HttpResponse:
-    return render(
-        request,
-        "sitecore/home.html",
-        {
-            "calendly_url": settings.CALENDLY_URL,
-        },
-    )
+    """Render homepage. If template rendering fails in production, fall back to a
+    minimal inline HTML so visitors don’t see a 500 while we investigate.
+
+    This also logs the exception with full traceback.
+    """
+    try:
+        return render(
+            request,
+            "sitecore/home.html",
+            {
+                "calendly_url": settings.CALENDLY_URL,
+            },
+        )
+    except Exception:
+        logger.exception("Home page template render failed; serving fallback HTML")
+        # Simple, dependency-free fallback to avoid hard 500s in production
+        html = (
+            "<html><head><meta charset='utf-8'><title>Great Owl Marketing</title>"
+            "<meta name='viewport' content='width=device-width, initial-scale=1'></head>"
+            "<body style='font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;"
+            "margin:40px;line-height:1.6;'>"
+            "<h1>Great Owl Marketing</h1>"
+            "<p>We’re experiencing a temporary issue rendering the homepage template."
+            " The site is still healthy (<a href='/healthz/'>healthz</a> ok)."
+            " Please try again shortly.</p>"
+            "<p><a href='/pricing/'>Pricing</a> · <a href='/book/'>Book a Call</a> · "
+            "<a href='/free-guide/'>Free Guide</a></p>"
+            "</body></html>"
+        )
+        return HttpResponse(html, content_type="text/html")
 
 
 def pricing(request: HttpRequest) -> HttpResponse:
@@ -137,3 +160,10 @@ def smartpro_agreement(request: HttpRequest) -> HttpResponse:
     We'll replace its contents when the embed code is provided.
     """
     return render(request, "smartpro-agreement.html")
+
+
+def healthz(request: HttpRequest) -> HttpResponse:
+    """Lightweight health check endpoint for uptime monitors and debugging 500s.
+    Returns 200 OK with a short body and no DB access.
+    """
+    return HttpResponse("ok", content_type="text/plain")

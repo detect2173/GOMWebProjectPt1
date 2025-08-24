@@ -54,3 +54,72 @@ dist/
 
 #git clean-preview   # shows what would be deleted
 #git clean-ignored   # deletes ignored files
+
+# Ignore Junie working assets
+.Junie/
+
+# Ignore cPanel/Passenger restart flag and temp files
+tmp/*
+!tmp/.gitkeep
+
+# Bytecode / caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtualenvs
+.venv/
+venv/
+
+# SQLite database (local dev only)
+db.sqlite3
+
+# JetBrains / PyCharm project settings
+.idea/
+
+# VS Code settings
+.vscode/
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test / coverage outputs
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Type checker / Lint caches
+.mypy_cache/
+.dmypy.json
+.ruff_cache/
+
+# Build / dist artifacts
+build/
+dist/
+*.egg-info/
+
+# Local environment files
+.env
+.env.*
+*.local
+!.env.example
+
+
+#git clean-preview   # shows what would be deleted
+#git clean-ignored   # deletes ignored files
+
+# Ignore Junie working assets
+.Junie/
+
+# Ignore collected static (server-generated)
+staticfiles/
+
+# Ignore uploaded media (server-generated/uploads)
+media/
